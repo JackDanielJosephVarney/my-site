@@ -85,7 +85,7 @@ export default class HomePageBackground extends React.Component {
   getFillColour() {
     switch (Math.ceil(Math.random() * 3)) {
       case 3:
-        return '#F44336';
+        return '#E91E63';
       default:
         return '#ffffff';
     }
