@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import './App.css';
-import CanvasBackground from './components/canvas-background/CanvasBackground';
+import HomePage from './containers/home-page/HomePage';
 
 class App extends Component {
   render() {
     return (
-      <CanvasBackground>
-        <div style={{ height: '400px', width: '200px' }} />
-      </CanvasBackground>
+      <HomePage>
+        <div />
+      </HomePage>
     );
   }
 }
