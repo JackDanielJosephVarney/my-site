@@ -11,7 +11,7 @@ text {
   font-family: 'Libre Barcode 39';
   font-size: 10vw;
   animation-name: textFill;
-  animation-duration: 2s;
+  animation-duration: 1.7s;
   animation-iteration-count: 1;
   animation-timing-function: cubic-bezier(0.95, 0.05, 0.795, 1);
 }
@@ -29,8 +29,10 @@ text {
 $nameOne: onTextHoverFive;
 $nameTwo: onTextHoverEight;
 $names: $nameOne, $nameTwo;
-$fontsizes: 4.5vw, 7vw;
+$fonts: 'Monoton', 'Monoton';
+$fontsizes: 4.5vw, 6vw;
 $spacing: 6px, 3px;
+$shadows: 0px 0px 5px #555, 0;
 
 @mixin onTextHoverAnimation($seconds, $name) {
   animation-name: $name;
@@ -51,19 +53,21 @@ $spacing: 6px, 3px;
   @include onTextHoverAnimation(4s, $nameOne);
 }
 
-@mixin fonts($fontsize, $space) {
-  font-family: 'Raleway';
+@mixin fonts($font, $fontsize, $space, $textshadow) {
+  font-family: $font, cursive;
   font-size: $fontsize;
-  font-weight: 600;
   letter-spacing: $space;
+  text-shadow: $textshadow;
 }
 
 @for $i from 1 through length($names) {
   $fontsize: nth($fontsizes, $i);
   $space: nth($spacing, $i);
+  $font: nth($fonts, $i);
 
   @keyframes #{nth($names, $i)} {
     0% {
+      text-shadow: none;
       font-family: 'Libre Barcode 39';
       opacity: 1;
     }
@@ -73,12 +77,12 @@ $spacing: 6px, 3px;
     }
 
     40% {
-      @include fonts($fontsize, $space);
+      @include fonts($font, $fontsize, $space, $shadows);
       opacity: 0;
     }
 
     100% {
-      @include fonts($fontsize, $space);
+      @include fonts($font, $fontsize, $space, $shadows);
       opacity: 1;
     }
   }

@@ -1,0 +1,40 @@
+$colors: #f44336, #4caf50, #2196f3, #ff9800, #e91e63, #ffeb3b;
+$names: red, green, blue, orange, pink, yellow;
+$top: 3%, 3%, 10%, 10%, 17%, 17%;
+$left: 47%, 53%, 43%, 57%, 47%, 53%;
+
+@for $i from 1 through length($colors) {
+  $colorName: #{nth($names, $i)};
+  $color: nth($colors, $i);
+  $t: nth($top, $i);
+  $l: nth($left, $i);
+
+  .color-button-#{$colorName} {
+    background-color: $color;
+
+    animation-name: color-button-on-hover-#{$colorName};
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: cubic-bezier(0.5, 0.5, 0.5, 0.5);
+  }
+
+  .color-button-wrapper-#{$colorName} {
+    position: absolute;
+    top: $t;
+    left: $l;
+  }
+
+  $reverse: '-';
+  @if $i % 2 == 1 {
+    $reverse: '';
+  }
+
+  @keyframes color-button-on-hover-#{$colorName} {
+    0% {
+      transform: rotate(0);
+    }
+    100% {
+      transform: rotate(#{$reverse}180deg);
+    }
+  }
+}

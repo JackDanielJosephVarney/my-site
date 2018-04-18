@@ -7,15 +7,11 @@ export default class HomePageBackground extends React.Component {
     this.drawHexagons();
   };
 
-  //<div className="content-container">{this.props.children}</div>
-
   render() {
     return (
-      <React.Fragment>
-        <div className="canvas-wrapper">
-          <canvas ref={canvas => (this.canvas = canvas)} />
-        </div>
-      </React.Fragment>
+      <div className="canvas-wrapper">
+        <canvas ref={canvas => (this.canvas = canvas)} />
+      </div>
     );
   }
 
@@ -49,10 +45,9 @@ export default class HomePageBackground extends React.Component {
     this.ctx.fillStyle = '#000';
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
-    let size = this.getHexagonSize();
+    const size = this.getHexagonSize();
 
     let y = 15;
-
     if (window.innerWidth < 960) y = 7.5;
 
     for (let yPos = 0; yPos < this.canvas.clientHeight; yPos += this.getRnd(y)) {
@@ -85,7 +80,7 @@ export default class HomePageBackground extends React.Component {
   getFillColour() {
     switch (Math.ceil(Math.random() * 3)) {
       case 3:
-        return '#E91E63';
+        return this.props.color;
       default:
         return '#ffffff';
     }
