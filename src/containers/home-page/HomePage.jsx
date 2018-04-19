@@ -2,23 +2,23 @@ import React from 'react';
 import './HomePage.css';
 import HomePageBackground from './HomePageBackground';
 import HomePageMask from './HomePageMask';
-import CanvasColorProvider, { CanvasColorContext } from '../../state/CanvasColorProvider';
+import HomeProvider, { HomeProviderContext } from '../../state/HomeProvider';
 import ColorButtons from '../color-buttons/ColorButtons';
 
 export default class LandingPage extends React.Component {
   render() {
     return (
-      <CanvasColorProvider>
+      <HomeProvider>
         <div className="home-page-wrapper">
-          <CanvasColorContext.Consumer>
+          <HomeProviderContext.Consumer>
             {context => <HomePageBackground color={context.color} />}
-          </CanvasColorContext.Consumer>
+          </HomeProviderContext.Consumer>
           <HomePageMask />
           <div className="content-container">
             <ColorButtons />
           </div>
         </div>
-      </CanvasColorProvider>
+      </HomeProvider>
     );
   }
 }

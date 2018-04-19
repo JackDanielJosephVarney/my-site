@@ -1,7 +1,9 @@
 $colors: #f44336, #4caf50, #2196f3, #ff9800, #e91e63, #ffeb3b;
 $names: red, green, blue, orange, pink, yellow;
-$top: 3%, 3%, 10%, 10%, 17%, 17%;
-$left: 47%, 53%, 43%, 57%, 47%, 53%;
+// $top: 3%, 3%, 10%, 10%, 17%, 17%;
+// $left: 47%, 53%, 43%, 57%, 47%, 53%;
+$top: 10%, 10%, 10%, 10%, 10%, 10%;
+$left: 25%, 35%, 45%, 55%, 65%, 75%;
 
 @for $i from 1 through length($colors) {
   $colorName: #{nth($names, $i)};

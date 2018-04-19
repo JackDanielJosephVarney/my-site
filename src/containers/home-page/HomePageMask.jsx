@@ -1,53 +1,26 @@
 import React from 'react';
 import './HomePageMask.css';
+import { HomeProviderContext } from '../../state/HomeProvider';
 
 export default class HomePageMask extends React.Component {
-  hasAnimated = false;
-
-  state = {
-    topClass: '',
-    middleClass: '',
-    bottomClass: ''
-  };
-
   render() {
     return (
-      <div className="svg-mask" onClick={this.animate.bind(this)}>
-        <svg width="100%" height="100%">
-          <Top cName={this.state.topClass} />
-          <Middle cName={this.state.middleClass} />
-          <Bottom cName={this.state.bottomClass} />
-        </svg>
-      </div>
+      <HomeProviderContext.Consumer>
+        {context => (
+          <div className="svg-mask">
+            <svg width="100%" height="100%">
+              <Top cName={this.getClass(context.showBarcode)} />
+              <Middle cName={this.getClass(context.showBarcode)} />
+              <Bottom cName={this.getClass(context.showBarcode)} />
+            </svg>
+          </div>
+        )}
+      </HomeProviderContext.Consumer>
     );
   }
 
-  animate() {
-    this.hasAnimated ? this.clearAll() : this.setAll();
-  }
-
-  animateSeq(func1, func2, func3) {
-    func1();
-    setTimeout(func2, 30);
-    setTimeout(func3, 60);
-  }
-
-  clearAll() {
-    this.animateSeq(
-      () => this.setState({ topClass: '' }),
-      () => this.setState({ middleClass: '' }),
-      () => this.setState({ bottomClass: '' })
-    );
-    this.hasAnimated = false;
-  }
-
-  setAll() {
-    this.animateSeq(
-      () => this.setState({ topClass: 'mouseover' }),
-      () => this.setState({ middleClass: 'mouseover' }),
-      () => this.setState({ bottomClass: 'mouseover' })
-    );
-    this.hasAnimated = true;
+  getClass(showBarcode) {
+    return showBarcode ? '' : 'mouseover';
   }
 }
 
