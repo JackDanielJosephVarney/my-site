@@ -3,5 +3,6 @@ export const canvasColors = {
   green: '#4CAF50',
   blue: '#2196F3',
   orange: '#FF9800',
-  pink: '#E91E63'
+  pink: '#E91E63',
+  yellow: '#FFEB3B'
 };
