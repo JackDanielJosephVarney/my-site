@@ -15,7 +15,7 @@ $left: 25%, 35%, 45%, 55%, 65%, 75%;
     background-color: $color;
 
     animation-name: color-button-on-hover-#{$colorName};
-    animation-duration: 2s;
+    animation-duration: 20s;
     animation-iteration-count: infinite;
     animation-timing-function: cubic-bezier(0.5, 0.5, 0.5, 0.5);
   }
@@ -27,16 +27,45 @@ $left: 25%, 35%, 45%, 55%, 65%, 75%;
   }
 
   $reverse: '-';
+  $reverseReverse: '';
   @if $i % 2 == 1 {
     $reverse: '';
+    $reverseReverse: '-';
   }
+
+  $translateValues1: '-20px, 5px', '-5px, -50px', '33px, -50px', '22px, -20px', '25px, -50px', '40px, 10px';
+  $translateValues2: '30px, -25px', '25px, 14px', '5px, 50px', '5px, 50px', '5px, 50px', '-30px, 50px';
+  $translateValues3: '-50px, 20px', '25px, -14px', '-5px, 50px', '5px, -50px', '-5px, 50px', '5px, -50px';
+  $tValue1: nth($translateValues1, $i);
+  $tValue2: nth($translateValues2, $i);
+  $tValue3: nth($translateValues3, $i);
+
+  $rnds: random(9), random(9), random(9);
+  $rnd1: '2#{nth($rnds, 1)}%';
+  $rnd2: '5#{nth($rnds, 2)}%';
+  $rnd3: '8#{nth($rnds, 3)}%';
 
   @keyframes color-button-on-hover-#{$colorName} {
     0% {
       transform: rotate(0);
     }
+
+    #{$rnd1} {
+      transform: rotate(#{$reverse}90deg);
+      transform: translate(#{$tValue3});
+    }
+
+    #{$rnd2} {
+      transform: translate(#{$tValue1});
+    }
+
+    #{$rnd3} {
+      transform: translate(#{$tValue2});
+    }
+
     100% {
-      transform: rotate(#{$reverse}180deg);
+      transform: rotate(#{$reverseReverse}90deg);
+      transform: translate(0px, 0px);
     }
   }
 }
