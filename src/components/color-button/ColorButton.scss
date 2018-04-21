@@ -1,7 +1,29 @@
 .color-button {
   text-decoration: none;
   border: none;
-  width: 30px;
-  height: 30px;
+  width: 100%;
+  height: 100%;
   cursor: pointer;
+}
+
+$colors: #f44336, #4caf50, #2196f3, #ff9800, #e91e63, #9c27b0;
+$colorsDark: #d32f2f, #388e3c, #1976d2, #f57c00, #c2185b, #7b1fa2;
+$names: red, green, blue, orange, pink, purple;
+
+@for $i from 1 through length($colors) {
+  $colorName: #{nth($names, $i)};
+  $color: nth($colors, $i);
+  $colorDark: nth($colorsDark, $i);
+
+  .color-button-#{$colorName} {
+    background-color: $colorDark;
+
+    &:hover {
+      background-color: $color;
+    }
+  }
+
+  .color-button-correct {
+    height: 150%;
+  }
 }

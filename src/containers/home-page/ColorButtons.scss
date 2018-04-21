@@ -1,0 +1,24 @@
+.color-buttons-container {
+  display: flex;
+  flex-direction: row;
+  align-content: flex-end;
+  height: 100%;
+  width: 100%;
+
+  @media screen and (max-width: 600px) {
+    flex-direction: column;
+  }
+
+  .color-buttons-row {
+    display: flex;
+    flex-direction: row;
+    height: 10%;
+    width: 100%;
+
+    @media screen and (max-width: 600px) {
+      &:last-of-type {
+        margin-top: auto;
+      }
+    }
+  }
+}

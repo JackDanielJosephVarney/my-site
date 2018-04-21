@@ -7,6 +7,13 @@
   width: 100%;
 }
 
+.canvas-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 95vh;
+}
+
 text {
   font-family: 'Libre Barcode 39';
   font-size: 10vw;

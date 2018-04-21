@@ -1,77 +1,77 @@
 import React from 'react';
 import './HomePageMask.css';
-import { HomeProviderContext } from '../../state/HomeProvider';
+import { HomeContext } from '../../state/HomeProvider';
+import HomePageHexagons from './HomePageHexagons';
 
-export default class HomePageMask extends React.Component {
-  render() {
-    return (
-      <HomeProviderContext.Consumer>
-        {context => (
+export default props => (
+  <HomeContext.Consumer>
+    {context => {
+      const maskClass = context.showBarcode ? '' : 'mouseover';
+      return (
+        <React.Fragment>
           <div className="svg-mask">
             <svg width="100%" height="100%">
-              <Top cName={this.getClass(context.showBarcode)} />
-              <Middle cName={this.getClass(context.showBarcode)} />
-              <Bottom cName={this.getClass(context.showBarcode)} />
+              <SVGFiller height={25.1} y={0} />
+              <TopMask className={maskClass} height={15.1} y={25} />
+              <MiddleMask className={maskClass} height={15.1} y={40} />
+              <BottomMask className={maskClass} height={15.1} y={55} />
+              <SVGFiller height={30} y={70} />
             </svg>
           </div>
-        )}
-      </HomeProviderContext.Consumer>
-    );
-  }
+          <div className="canvas-wrapper">
+            <HomePageHexagons color={context.color} />
+          </div>
+        </React.Fragment>
+      );
+    }}
+  </HomeContext.Consumer>
+);
 
-  getClass(showBarcode) {
-    return showBarcode ? '' : 'mouseover';
-  }
-}
+const SVGFiller = props => <rect width="100%" height={`${props.height}%`} x="0" y={`${props.y}%`} stroke="#000" />;
+const getPercent = num => num + '%';
+const getTextY = (num, height) => getPercent(num + height - 2);
 
-class Top extends React.Component {
-  render() {
-    return (
-      <React.Fragment>
-        <rect width="100%" height="25.1%" x="0" y="0%" stroke="#000" />
-        <rect width="100%" height="11.1%" x="0" y="25%" mask="url(#top-text-mask)" stroke="#000" />
-        <mask id="top-text-mask">
-          <rect width="100%" height="11.1%" fill="#fff" x="0" y="25%" />
-          <text className={this.props.cName} id="top-text" x="50%" y="35%" textAnchor="middle">
-            Welcome to
-          </text>
-        </mask>
-        <rect width="100%" height="3.1%" x="0" y="36%" stroke="#000" />
-      </React.Fragment>
-    );
-  }
-}
+const TopMask = props => {
+  const { height, y } = props;
+  return (
+    <React.Fragment>
+      <rect width="100%" height={getPercent(height)} x="0" y={getPercent(y)} mask="url(#top-text-mask)" stroke="#000" />
+      <mask id="top-text-mask">
+        <rect width="100%" height={getPercent(height)} fill="#fff" x="0" y={getPercent(y)} />
+        <text className={props.className} id="top-text" x="50%" y={getTextY(y, height)} textAnchor="middle">
+          Welcome to
+        </text>
+      </mask>
+    </React.Fragment>
+  );
+};
 
-class Middle extends React.Component {
-  render() {
-    return (
-      <React.Fragment>
-        <rect width="100%" height="15.1%" x="0" y="39%" mask="url(#middle-text-mask)" />
-        <mask id="middle-text-mask">
-          <rect width="100%" height="15.1%" fill="#fff" x="0" y="39%" />
-          <text className={this.props.cName} id="middle-text" x="50%" y="50%" textAnchor="middle">
-            jackvarney.co.uk
-          </text>
-        </mask>
-        <rect width="100%" height="1.1%" x="0" y="54%" stroke="#000" />
-      </React.Fragment>
-    );
-  }
-}
+const MiddleMask = props => {
+  const { height, y } = props;
+  return (
+    <React.Fragment>
+      <rect width="100%" height={getPercent(height)} x="0" y={getPercent(y)} mask="url(#middle-text-mask)" />
+      <mask id="middle-text-mask">
+        <rect width="100%" height={getPercent(height)} fill="#fff" x="0" y={getPercent(y)} />
+        <text className={props.className} id="middle-text" x="50%" y={getTextY(y, height)} textAnchor="middle">
+          jackvarney.co.uk
+        </text>
+      </mask>
+    </React.Fragment>
+  );
+};
 
-class Bottom extends React.Component {
-  render() {
-    return (
-      <React.Fragment>
-        <rect width="100%" height="13.1%" x="0" y="55%" mask="url(#bottom-text-mask)" />
-        <mask id="bottom-text-mask">
-          <rect width="100%" height="13.1%" fill="#fff" x="0" y="55%" />
-          <text className={this.props.cName} id="bottom-text" x="50%" y="65%" textAnchor="middle">
-            enjoy the hexagons
-          </text>
-        </mask>
-        <rect width="100%" height="32%" x="0" y="68%" stroke="#000" />
-      </React.Fragment>
-    );
-  }
-}
+const BottomMask = props => {
+  const { height, y } = props;
+  return (
+    <React.Fragment>
+      <rect width="100%" height={getPercent(height)} x="0" y={getPercent(y)} mask="url(#bottom-text-mask)" />
+      <mask id="bottom-text-mask">
+        <rect width="100%" height={getPercent(height)} fill="#fff" x="0" y={getPercent(y)} />
+        <text className={props.className} id="bottom-text" x="50%" y={getTextY(y, height)} textAnchor="middle">
+          enjoy the hexagons
+        </text>
+      </mask>
+    </React.Fragment>
+  );
+};
